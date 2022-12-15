@@ -1,2 +1,2 @@
 # Projekt_Omega
-Not For Commercial Use
+Student Project
