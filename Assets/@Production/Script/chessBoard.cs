@@ -5,6 +5,9 @@ public class chessBoard : MonoBehaviour
 {
     [Header("Art")]
     [SerializeField] private Material tileMaterial;
+    [SerializeField] private float tileSize = 1.0f;
+    [SerializeField] private float yOffset = 0.2f;
+    [SerializeField] private Vector3 boadrdCenter = Vector3.zero;
 
     #region Logic
     private const int TILE_COUNT_X = 8;
@@ -12,15 +15,16 @@ public class chessBoard : MonoBehaviour
     private GameObject[,] tiles;
     private Camera currentCamera;
     private Vector2Int currentHover;
+    private Vector3 bounds;
 
     public void Awake()
     {
-        GenerateAllTiles(1, TILE_COUNT_X, TILE_COUNT_Y);
+        GenerateAllTiles(tileSize, TILE_COUNT_X, TILE_COUNT_Y);
     }
 
     private void Update()
     {
-        if (!currentCamera) 
+        if (!currentCamera)
         {
             currentCamera = Camera.main;
             return;
@@ -28,7 +32,7 @@ public class chessBoard : MonoBehaviour
 
         RaycastHit info;
         Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out info, 100, LayerMask.GetMask("Tile","Hover")))
+        if (Physics.Raycast(ray, out info, 100, LayerMask.GetMask("Tile", "Hover")))
         {
             Vector2Int hitPosition = LookupTileIndex(info.transform.gameObject);
 
@@ -45,9 +49,9 @@ public class chessBoard : MonoBehaviour
                 tiles[hitPosition.x, hitPosition.y].layer = LayerMask.NameToLayer("Hover");
             }
         }
-        else 
+        else
         {
-            if (currentHover != -Vector2Int.one) 
+            if (currentHover != -Vector2Int.one)
             {
                 tiles[currentHover.x, currentHover.y].layer = LayerMask.NameToLayer("Tile");
                 currentHover = -Vector2Int.one;
@@ -60,6 +64,10 @@ public class chessBoard : MonoBehaviour
     #region Generate Tiles 
     private void GenerateAllTiles(float tileSize, int tilecountX, int tilecountY)
     {
+        yOffset += transform.position.y;
+        bounds = new Vector3((tilecountX / 2) * tileSize, 0, (tilecountX / 2) * tileSize) + boadrdCenter;
+
+
         tiles = new GameObject[tilecountX, tilecountY];
         for (int x = 0; x < tilecountX; x++)
         {
@@ -79,10 +87,10 @@ public class chessBoard : MonoBehaviour
         tileObject.AddComponent<MeshRenderer>().material = tileMaterial;
 
         Vector3[] vertices = new Vector3[4];
-        vertices[0] = new Vector3(x * tileSize, 0, y * tileSize);
-        vertices[1] = new Vector3(x * tileSize, 0, (y + 1) * tileSize);
-        vertices[2] = new Vector3((x + 1) * tileSize, 0, y * tileSize);
-        vertices[3] = new Vector3((x + 1) * tileSize, 0, (y + 1) * tileSize);
+        vertices[0] = new Vector3(x * tileSize, yOffset, y * tileSize) - bounds;
+        vertices[1] = new Vector3(x * tileSize, yOffset, (y + 1) * tileSize) - bounds;
+        vertices[2] = new Vector3((x + 1) * tileSize, yOffset, y * tileSize) - bounds;
+        vertices[3] = new Vector3((x + 1) * tileSize, yOffset, (y + 1) * tileSize) - bounds;
 
         int[] tris = new int[] { 0, 1, 2, 1, 3, 2 };
 
@@ -99,10 +107,12 @@ public class chessBoard : MonoBehaviour
     #endregion
 
     #region Operations
-    private Vector2Int LookupTileIndex(GameObject hitInfo) 
+    private Vector2Int LookupTileIndex(GameObject hitInfo)
     {
-        for (int x = 0; x < TILE_COUNT_X; x++) {
-            for (int y = 0; y < TILE_COUNT_Y; y++) {
+        for (int x = 0; x < TILE_COUNT_X; x++)
+        {
+            for (int y = 0; y < TILE_COUNT_Y; y++)
+            {
                 if (tiles[x, y] == hitInfo)
                 {
                     return new Vector2Int(x, y);
