@@ -16,6 +16,7 @@ public class chessBoard : MonoBehaviour
 
     #region Logic
     private ChessPiece[,] chessPieces;
+    private ChessPiece currentlyDragging;
     private const int TILE_COUNT_X = 8;
     private const int TILE_COUNT_Y = 8;
     private GameObject[,] tiles;
@@ -23,7 +24,7 @@ public class chessBoard : MonoBehaviour
     private Vector2Int currentHover;
     private Vector3 bounds;
 
-    public void Awake()
+    private void Awake()
     {
         GenerateAllTiles(tileSize, TILE_COUNT_X, TILE_COUNT_Y);
         SpawnAllPiece();
@@ -56,6 +57,29 @@ public class chessBoard : MonoBehaviour
                 currentHover = hitPosition;
                 tiles[hitPosition.x, hitPosition.y].layer = LayerMask.NameToLayer("Hover");
             }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (chessPieces[hitPosition.x, hitPosition.y] != null)
+                {
+                    if (true)
+                    {
+                        currentlyDragging = chessPieces[hitPosition.x, hitPosition.y];
+                    }
+                }
+            }
+
+            if (currentlyDragging != null && Input.GetMouseButtonUp(0))
+            {
+                Vector2Int previousPosition = new Vector2Int(currentlyDragging.currentX, currentlyDragging.currentY);
+                
+                bool validMove = MoveTo(currentlyDragging, hitPosition.x, hitPosition.y);
+                if (!validMove)
+                {
+                    currentlyDragging.transform.position = GetTileCenter(previousPosition.x, previousPosition.y);
+                    currentlyDragging = null;
+                }
+            }
         }
         else
         {
@@ -66,7 +90,6 @@ public class chessBoard : MonoBehaviour
             }
         }
     }
-
     #endregion
 
     #region Generate Tiles 
@@ -197,6 +220,18 @@ public class chessBoard : MonoBehaviour
     #endregion
 
     #region Operations
+    private bool MoveTo(ChessPiece cp, int x, int y)
+    {
+        Vector2Int previousPosition = new Vector2Int(cp.currentX, cp.currentY);
+        
+        chessPieces[x, y] = cp;
+        chessPieces[previousPosition.x, previousPosition.y] = null;
+
+        PositioningSinglePiece(x, y);
+
+        return true;
+    }
+
     private Vector2Int LookupTileIndex(GameObject hitInfo)
     {
         for (int x = 0; x < TILE_COUNT_X; x++)
@@ -212,6 +247,8 @@ public class chessBoard : MonoBehaviour
         return -Vector2Int.one;
     }
     #endregion
+
+
 }
 
 
