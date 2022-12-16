@@ -448,3 +448,13 @@ MonoBehaviour:
   tileSize: 0.7
   yOffset: 0.15
   boadrdCenter: {x: 0, y: 0, z: 0}
+  prefabs:
+  - {fileID: 3077481666947983860, guid: 21ea176dba8ed2c42996d412cd3020e3, type: 3}
+  - {fileID: 183024993737942305, guid: ac0d292506515cd47b3de5915ed06e68, type: 3}
+  - {fileID: 8878618482663900791, guid: ac3f69c1a9b83c749b2bfca9d6f24961, type: 3}
+  - {fileID: 8814022074376711423, guid: 7a6a17965c6044f4b8515169ab6f1f3c, type: 3}
+  - {fileID: 3176305215606120400, guid: 78f0f828cfbfcd44e982137fa4bfeb94, type: 3}
+  - {fileID: 51896877759513456, guid: 7691c8bc6ae48764fa00365e69b388a4, type: 3}
+  teamMaterials:
+  - {fileID: 2100000, guid: 6b973cbceaf97f748ba2c7a8922a3f38, type: 2}
+  - {fileID: 2100000, guid: 1188d7d765a0aaa4aad6f041e702dff4, type: 2}
