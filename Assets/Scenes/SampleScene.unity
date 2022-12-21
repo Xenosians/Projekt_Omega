@@ -2016,7 +2016,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.5237704, y: 0, z: 0, w: 0.8518595}
-  m_LocalPosition: {x: 25, y: 5.75, z: -3.5}
+  m_LocalPosition: {x: 0, y: 5.75, z: -3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2470,7 +2470,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1846585636}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ChessBoard, Assembly-CSharp
         m_MethodName: OnResetButton
         m_Mode: 1
@@ -2736,7 +2736,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1846585636}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ChessBoard, Assembly-CSharp
         m_MethodName: OnExitButton
         m_Mode: 1
