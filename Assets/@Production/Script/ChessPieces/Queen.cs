@@ -67,7 +67,6 @@ public class Queen : ChessPiece
             }
         }
 
-        //top right
         for (int x = currentX + 1, y = currentY + 1; x < tileCountX && y < tileCountY; x++, y++)
         {
             if (board[x, y] == null)
@@ -76,7 +75,10 @@ public class Queen : ChessPiece
             {
                 if (board[x, y].team != team)
                     r.Add(new Vector2Int(x, y));
+
+                break;
             }
+
         }
 
         //top left
@@ -88,6 +90,8 @@ public class Queen : ChessPiece
             {
                 if (board[x, y].team != team)
                     r.Add(new Vector2Int(x, y));
+
+                break;
             }
         }
 
@@ -100,6 +104,8 @@ public class Queen : ChessPiece
             {
                 if (board[x, y].team != team)
                     r.Add(new Vector2Int(x, y));
+
+                break;
             }
         }
 
@@ -112,6 +118,8 @@ public class Queen : ChessPiece
             {
                 if (board[x, y].team != team)
                     r.Add(new Vector2Int(x, y));
+
+                break;
             }
         }
 
