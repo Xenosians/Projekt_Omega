@@ -2,11 +2,11 @@
 
 public class NetMessage 
 {
-    public OpCode code { set; get; }
+    public OpCode Code { set; get; }
 
     public virtual void Serialize(ref DataStreamWriter writer)
     {
-        writer.WriteByte((byte)code);
+        writer.WriteByte((byte)Code);
     }
 
     public virtual void Deserialize(DataStreamReader reader)
