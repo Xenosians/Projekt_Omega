@@ -1155,7 +1155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1646473383
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1340,6 +1340,7 @@ MonoBehaviour:
   deathSize: 0.3
   deathSpacing: 0.35
   dragOffset: 1.3
+  victoryScreen: {fileID: 1646473382}
   prefabs:
   - {fileID: 3077481666947983860, guid: 21ea176dba8ed2c42996d412cd3020e3, type: 3}
   - {fileID: 183024993737942305, guid: ac0d292506515cd47b3de5915ed06e68, type: 3}
