@@ -24,7 +24,7 @@ public class ChessPiece : MonoBehaviour
 
     private void Start()
     {
-        transform.rotation = Quaternion.Euler((team == 0) ? Vector3.zero : new Vector3(0, 180, 0));
+        transform.rotation= Quaternion.Euler((team == 0) ? Vector3.zero : new Vector3(0,180,0));
     }
 
     private void Update()
@@ -48,6 +48,7 @@ public class ChessPiece : MonoBehaviour
     {
         return SpecialMove.None;
     }
+
     public virtual void SetPosition(Vector3 position, bool force = false)
     {
         desiredPosition = position;
